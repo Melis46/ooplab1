@@ -27,3 +27,45 @@ int findSmallest(const int* numbers, int size) {
     }
     return smallest;
 }
+int main() {
+    // input.txt dosyasýný okumak için bir ifstream nesnesi oluþturuyoruz.
+    std::ifstream inputFile("input.txt");
+
+    // Dosya baþarýlý bir þekilde açýldý mý kontrol ediyoruz.
+    if (inputFile.is_open()) {
+        // Ýlk olarak dosyadan kaç adet sayý olduðunu okuyoruz.
+        int count;
+        inputFile >> count;
+
+        // Sayýlarý tutmak için dinamik bellek tahsis edilmiþ bir dizi oluþturuyoruz.
+        int* numbers = new int[count];
+        for (int i = 0; i < count; ++i) {
+            // Sayýlarý dosyadan okuyoruz.
+            inputFile >> numbers[i];
+        }
+
+        // Gerekli hesaplamalarý yapýyoruz.
+        int sum = calculateSum(numbers, count);
+        int product = calculateProduct(numbers, count);
+        float average = static_cast<float>(sum) / count;
+        int smallest = findSmallest(numbers, count);
+
+        // Sonuçlarý ekrana yazdýrýyoruz.
+        std::cout << "Sum is " << sum << std::endl;
+        std::cout << "Product is " << product << std::endl;
+        std::cout << "Average is " << average << std::endl;
+        std::cout << "Smallest is " << smallest << std::endl;
+
+        // Belleði serbest býrakýyoruz.
+        delete[] numbers;
+
+        // Dosyayý kapatýyoruz.
+        inputFile.close();
+    }
+    else {
+        // Dosya açýlamazsa hata mesajýný yazdýrýyoruz.
+        std::cout << "Error: Unable to open the input file." << std::endl;
+    }
+
+    return 0;
+}
