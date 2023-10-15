@@ -17,3 +17,13 @@ int calculateProduct(const int* numbers, int size) {
     }
     return product;
 }
+// Dizinin en küçük elemanýný bulan fonksiyon
+int findSmallest(const int* numbers, int size) {
+    int smallest = numbers[0];
+    for (int i = 1; i < size; ++i) {
+        if (numbers[i] < smallest) {
+            smallest = numbers[i];
+        }
+    }
+    return smallest;
+}
